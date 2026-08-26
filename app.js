@@ -35,7 +35,7 @@
   const $ = id => document.getElementById(id);
   const esc = value => String(value ?? '').replace(/[&<>'"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   const num = value => value === '' || value === null || value === undefined ? null : Number(value);
-  const validNum = value => Number.isFinite(Number(value));
+  const validNum = value => value !== '' && value !== null && value !== undefined && Number.isFinite(Number(value));
   const clone = value => JSON.parse(JSON.stringify(value));
   const today = () => new Date().toISOString();
 
