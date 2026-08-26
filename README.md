@@ -1,36 +1,35 @@
 # Filament Inventory
 
-Mobile-first, local-first 3D printer filament inventory dashboard.
+A mobile-first, local-first filament inventory PWA for tracking 3D-printing spools from iPhone, iPad, or desktop.
 
-## Features
+## Current capabilities
 
-- Photo-audited 21-spool starter inventory
-- Brand, material/type, color, confidence, location and spool-format tracking
-- Conservative visual estimates: unknown levels remain unknown
-- Gross/tare weighing workflow that supersedes visual estimates
-- Automatic remaining grams, percentage and stock status
-- Search and filters
-- Add, edit and delete spools
-- JSON backup/import
-- CSV export for Google Sheets, Excel and future Spoolman migration
-- Browser-local persistence
-- Installable PWA/offline cache
-- Zero-build static deployment for Netlify
+- Conservative 21-spool starter inventory based on the photo audit
+- Brand, material/type, color, spool format, location, and confidence
+- Visual remaining-% estimates when that is all that is known
+- Gross-weight minus tare-weight measurements that override visual estimates
+- Measurement history for repeat weigh-ins
+- Per-spool reorder thresholds with dashboard/reorder flags
+- Opened and bagged/sealed storage state
+- Purchase source, purchase price, and purchase date
+- Search and filters, including `Reorder needed`
+- JSON backup/restore including measurement history
+- CSV export for Google Sheets / Excel
+- Responsive mobile UI and offline/PWA caching
+- No build step and no third-party runtime dependencies
 
-## Run locally
+## Data behavior
 
-Serve the repository with any static web server. For example:
+Inventory is stored in browser `localStorage`. That keeps the app simple and private, but data does **not** automatically sync between different browsers/devices. Use JSON backup/export when moving between devices until a shared backend is added.
 
-```powershell
-python -m http.server 8080
-```
+Existing v1 browser data is migrated in place when v2 loads. New v2 fields receive safe defaults; existing spool IDs and inventory values are preserved.
 
-Then open `http://localhost:8080`.
+## Netlify
 
-## Storage
+This repository is designed to deploy as a static site. `netlify.toml` publishes the repository root and includes security/cache headers.
 
-Inventory edits are stored in the browser's `localStorage`. Use **Data → Export JSON** for portable backups. Clearing browser/site data will remove local inventory unless it has been exported.
+No npm install, build command, or framework build is required.
 
-## Deployment
+## Inventory rule
 
-The project is a zero-build static site. `netlify.toml` publishes the repository root.
+Measured gross − tare weight is authoritative. Visual estimates remain useful for unweighed spools, and unknown values remain unknown rather than being converted to zero.
