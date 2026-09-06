@@ -1,35 +1,39 @@
-# Filament Inventory
+# Filament Inventory — archived predecessor
 
-A mobile-first, local-first filament inventory PWA for tracking 3D-printing spools from iPhone, iPad, or desktop.
+> **Superseded repository.** Active Filament Inventory development has moved to `azmusgb/filamentinventory`.
+>
+> Do not deploy or extend this repository for production use. It is retained only for historical provenance of the original local-only inventory prototype.
 
-## Current capabilities
+## Historical scope
 
-- Conservative 21-spool starter inventory based on the photo audit
-- Brand, material/type, color, spool format, location, and confidence
-- Visual remaining-% estimates when that is all that is known
-- Gross-weight minus tare-weight measurements that override visual estimates
-- Measurement history for repeat weigh-ins
-- Per-spool reorder thresholds with dashboard/reorder flags
-- Opened and bagged/sealed storage state
-- Purchase source, purchase price, and purchase date
-- Search and filters, including `Reorder needed`
-- JSON backup/restore including measurement history
-- CSV export for Google Sheets / Excel
-- Responsive mobile UI and offline/PWA caching
-- No build step and no third-party runtime dependencies
+This repository contains the early mobile-first, local-first filament inventory PWA that predated the current multi-profile, cloud-sync, printer/AMS, recovery and grounded-Assistant architecture.
 
-## Data behavior
+Its original capabilities included:
 
-Inventory is stored in browser `localStorage`. That keeps the app simple and private, but data does **not** automatically sync between different browsers/devices. Use JSON backup/export when moving between devices until a shared backend is added.
+- conservative starter inventory based on the photo audit;
+- brand, material/type, color, spool format, location and confidence;
+- visual remaining-% estimates when that was all that was known;
+- gross-weight minus tare-weight measurements overriding visual estimates;
+- measurement history;
+- reorder thresholds;
+- opened/bagged storage state;
+- purchase metadata;
+- search/filtering;
+- JSON backup/restore;
+- CSV export;
+- responsive/offline PWA behavior.
 
-Existing v1 browser data is migrated in place when v2 loads. New v2 fields receive safe defaults; existing spool IDs and inventory values are preserved.
+## Historical data behavior
 
-## Netlify
+Inventory in this predecessor is stored in browser `localStorage` and does **not** provide the current cross-device/profile-scoped cloud architecture.
 
-This repository is designed to deploy as a static site. `netlify.toml` publishes the repository root and includes security/cache headers.
+## Canonical repositories
 
-No npm install, build command, or framework build is required.
+Use these repositories instead:
 
-## Inventory rule
+- `azmusgb/filamentinventory` — Filament Inventory PWA, Bill/Aimee profile isolation, cloud sync, device APIs and grounded inventory Assistant.
+- `azmusgb/bambuhelper-smart-display` — canonical Waveshare Workshop OS / WS350 firmware, hardware controls, OTA/recovery and physical acceptance.
 
-Measured gross − tare weight is authoritative. Visual estimates remain useful for unweighed spools, and unknown values remain unknown rather than being converted to zero.
+## Preservation policy
+
+Keep this repository read-only after archival. Do not delete or rewrite its Git history; it remains useful as provenance for the initial product lineage.
